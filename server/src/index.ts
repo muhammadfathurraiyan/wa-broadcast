@@ -1,36 +1,15 @@
-import express, { Express, Request, Response } from "express";
-import { Client, LocalAuth } from "whatsapp-web.js";
+import express from "express";
+import { createServer } from "http";
+import { Server } from "socket.io";
 
-const app: Express = express();
-const port = 3000;
-
-app.get("/", (req: Request, res: Response) => {
-  res.send("Express + TypeScript Server");
+const app = express();
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
+  cors: { origin: "http://localhost:5173" },
 });
 
-app.listen(port, () => {
-  console.log(`listening on *:${port}`);
+io.on("connection", (socket) => {
+  console.log("conected from:", socket.id);
 });
 
-app.post("/api/:id", async (req: Request, res: Response) => {
-  console.log(req.params.id);
-  try {
-    const client = new Client({
-      authStrategy: new LocalAuth({ clientId: "ID" }),
-      puppeteer: { headless: false },
-    });
-
-    client.on("qr", (qr) => {
-      console.log("QR RECEIVED", qr);
-      res.json(qr);
-    });
-
-    client.on("ready", () => {
-      console.log("Client is ready!");
-    });
-
-    client.initialize();
-  } catch (error) {
-    console.log(error);
-  }
-});
+httpServer.listen(3000);
