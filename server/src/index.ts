@@ -15,13 +15,13 @@ const sendMessageWithDelay = async (
   message: string,
   link: string
 ) => {
-  const foto = await MessageMedia.fromUrl(link);
+  const media = await MessageMedia.fromUrl(link);
   for (const formattedNumber of array) {
     const isRegistered = await client.isRegisteredUser(formattedNumber);
     if (isRegistered) {
-      client.sendMessage(formattedNumber, foto + message);
+      client.sendMessage(formattedNumber, media, { caption: message });
     }
-    await new Promise((resolve) => setTimeout(resolve, 10000));
+    await new Promise((resolve) => setTimeout(resolve, 60000));
   }
 };
 

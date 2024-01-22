@@ -26,7 +26,7 @@ function App() {
 
   if (status === "ready") {
     return (
-      <main className="max-w-2xl mx-auto gap-4 flex flex-col mt-16">
+      <main className="max-w-2xl py-24 mx-auto gap-4 flex flex-col mt-16">
         <h1 className="text-center text-neutral-900 uppercase font-bold text-3xl">
           Whatsapp Broadcast
         </h1>
@@ -35,7 +35,7 @@ function App() {
     );
   } else {
     return (
-      <main className="max-w-2xl mx-auto gap-4 flex flex-col mt-16">
+      <main className="max-w-2xl py-24 mx-auto gap-4 flex flex-col mt-16">
         <h1 className="text-center text-neutral-900 uppercase font-bold text-3xl">
           Whatsapp Broadcast
         </h1>
